@@ -41,3 +41,8 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+src/Main-app.xml
+*.swf
+bin-debug/Main-app.xml
+*.prefs
+.actionScriptProperties
