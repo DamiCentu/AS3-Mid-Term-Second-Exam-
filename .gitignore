@@ -46,3 +46,5 @@ src/Main-app.xml
 bin-debug/Main-app.xml
 *.prefs
 .actionScriptProperties
+bin-debug/*
+.actionScriptProperties
