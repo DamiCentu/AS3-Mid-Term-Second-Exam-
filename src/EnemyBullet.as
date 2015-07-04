@@ -3,7 +3,7 @@ package
 	public class EnemyBullet
 	{
 		public var model:MC_bullet;
-		public var speed:int = 2;
+		public var speed:int = 3;
 		public var spawneo:Boolean;
 		
 		public function EnemyBullet()

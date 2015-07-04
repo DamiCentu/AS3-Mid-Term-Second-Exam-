@@ -8,13 +8,9 @@ package
 	import flash.display.Stage;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
-<<<<<<< HEAD
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
-	import flash.ui.Keyboard;
-=======
->>>>>>> origin/master
 	
 	[SWF(width="1024", height="768", frameRate="60")]
 	
@@ -63,7 +59,7 @@ package
 		{
 			mainStage = stage;
 			
-		//	cam = new camera2d();
+			//	cam = new camera2d();
 			//cam.on();
 			
 			myLevel1 = new Level1 ();
@@ -234,12 +230,12 @@ package
 		public function colisionHeroEnemy():void
 		{
 			for (var j:int =0 ; j < vectorEnemys.length; j++) 
+			{
+				if(myHero.model.hitTestObject(vectorEnemys[j].model))
 				{
-					if(myHero.model.hitTestObject(vectorEnemys[j].model))
-					{
-						myHero.looseLife();
-					}
+					myHero.looseLife();
 				}
+			}
 		}
 		
 		public function colisionBulletsEnemy():void
@@ -261,13 +257,13 @@ package
 				for (var j:int =0 ; j < vectorEnemys.length; j++) 
 				{
 					if(vectorEnemys[j].model.mc_checkRight.hitTestObject(platforms[i]))
-						{
-							vectorEnemys[j].direction = -1;
-						}
+					{
+						vectorEnemys[j].direction = -1;
+					}
 					else if(vectorEnemys[j].model.mc_checkLeft.hitTestObject(platforms[i]))
-						{
-							vectorEnemys[j].direction = 1;
-						}
+					{
+						vectorEnemys[j].direction = 1;
+					}
 				}
 			}
 		}
@@ -293,14 +289,9 @@ package
 				colisionBulletsEnemy();
 				heroShootTimer();
 				colisionHeroBulletPlatform();
-<<<<<<< HEAD
 				lifeInStage();
-				//colisionEnemyBulletPlatform();
-				//cam.lookAt(myHero.model);
-=======
 				colisionEnemyBulletPlatform();
-				cam.lookAt(myHero.model);
->>>>>>> origin/master
+				//cam.lookAt(myHero.model);				
 				
 				for (var l:int =0 ; l < vectorHeroBullets.length; l++) 
 				{
