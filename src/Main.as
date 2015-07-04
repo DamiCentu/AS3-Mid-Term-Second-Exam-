@@ -216,6 +216,18 @@ package
 			}
 		}
 		
+		public function colisionEnemyBulletHero():void
+		{
+			for (var j:int =0 ; j < vectorEnemyBullets.length; j++) 
+			{
+				if(vectorEnemyBullets[j] != null && vectorEnemyBullets[j].model.hitTestObject(myHero.model))
+				{
+					myHero.looseLife();
+					vectorEnemyBullets[j].destroy();
+				}
+			}
+		}
+		
 		public function colisionHeroPlatform():void
 		{
 			for (var i:int =0 ; i < platforms.length; i++) 
@@ -291,6 +303,7 @@ package
 				colisionHeroBulletPlatform();
 				lifeInStage();
 				colisionEnemyBulletPlatform();
+				colisionEnemyBulletHero();
 				//cam.lookAt(myHero.model);				
 				
 				for (var l:int =0 ; l < vectorHeroBullets.length; l++) 

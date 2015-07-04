@@ -19,12 +19,16 @@ package
 		{
 			model.y += speed;
 		}
-		public function spawn():void
+		public function spawn(posY:int , posX:int):void
 		{
 			model = new MC_bullet;
 			Main.mainStage.addChild(model);
-			model.x = Main.myEnemy.model.x;
-			model.y = Main.myEnemy.model.y;
+			//model.x = Main.myEnemy.model.x;
+			//model.y = Main.myEnemy.model.y;
+			//posY = model.y;
+			//posX = model.x;
+			model.y = posY ; 
+			model.x = posX;
 			spawneo = true;
 			Main.vectorEnemyBullets.push(this);
 		}

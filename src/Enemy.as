@@ -68,12 +68,15 @@ package
 			currentTimeToShoot += 1000 / Main.mainStage.frameRate;
 			if(currentTimeToShoot >= timeToShoot)
 			{
-				Main.myEnemyBullet = new EnemyBullet ();
-				Main.myEnemyBullet.spawn();
-				currentTimeToShoot = 0
-				if (Main.myEnemyBullet.spawneo)
+				for (var i:int =0 ; i < Main.vectorEnemys.length; i++) 
 				{
-					checkRespawn = true;
+					Main.myEnemyBullet = new EnemyBullet ();
+					Main.myEnemyBullet.spawn(Main.vectorEnemys[i].model.y, Main.vectorEnemys[i].model.x);
+					currentTimeToShoot = 0
+					if (Main.myEnemyBullet.spawneo)
+					{
+						checkRespawn = true;
+					}
 				}
 			}
 		}
