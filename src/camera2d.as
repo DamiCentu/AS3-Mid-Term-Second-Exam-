@@ -1,7 +1,5 @@
 package
-{
-	//asdasd
-	
+{	
 	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.geom.Point;
@@ -46,7 +44,7 @@ package
 			x = pView.x - Main.mainStage.stageWidth / 2;
 			y = pView.y - Main.mainStage.stageHeight / 2;
 			
-			trace(pLocal, pGlobal);
+			//trace(pLocal, pGlobal);
 		}
 		
 		public function smoothLookAt():void

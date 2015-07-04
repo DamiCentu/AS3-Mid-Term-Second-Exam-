@@ -7,6 +7,7 @@ package
 		public var velocityX:int;
 		public var velocityY:int;
 		public var scale:Number = 0.2;
+		public var lifes:int = 5;
 		
 		public function Hero()
 		{
@@ -29,11 +30,18 @@ package
 			model.y += velocityY;
 			velocityY = 0;
 			velocityX = 0;
+			if (lifes <= 0)
+			{
+				Main.loose();
+				
+			}
+			
 		}
 		public function looseLife ():void
 		{
+			lifes--;
 			model.x = 200;
-			model.y = 600; 
+			model.y = 600;
 		}
 		public function moveX(direction:int):void
 		{

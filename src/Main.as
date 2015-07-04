@@ -9,6 +9,9 @@ package
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
+	import flash.text.TextField;
+	import flash.text.TextFormat;
+	import flash.text.TextFormatAlign;
 	import flash.ui.Keyboard;
 	
 	[SWF(width="1024", height="768", frameRate="60")]
@@ -46,15 +49,20 @@ package
 		public var gameIsPaused:Boolean = false;
 		private var pauseMC:MovieClip;
 		
-		public var cam:camera2d;
+		public static var texto:TextField = new TextField();
+		public static var formato:TextFormat = new TextFormat();
+		
+		public static var endGame:Boolean = false;
+		
+		//public var cam:camera2d;
 		//public var level1mc:MovieClip;
 		
 		public function Main()
 		{
 			mainStage = stage;
 			
-			cam = new camera2d();
-			cam.on();
+		//	cam = new camera2d();
+			//cam.on();
 			
 			myLevel1 = new Level1 ();
 			myLevel1.spawn();
@@ -115,6 +123,36 @@ package
 			mc.addChild(rectangle2);
 			
 			return mc;
+		}
+		
+		public function lifeInStage():void
+		{
+			formato.font = "Comic Sans MS";
+			formato.size = 30;
+			formato.color = 0xFFFFFF;
+			formato.align = TextFormatAlign.CENTER;
+			texto.width = 300;
+			texto.x = -75;
+			texto.y = mainStage.stageHeight - texto.height/2;
+			texto.text = "Vidas: " + myHero.lifes;
+			texto.setTextFormat(formato)
+			mainStage.addChild(texto);
+		}
+		
+		public static function loose():void
+		{
+			formato.font = "Comic Sans MS";
+			formato.size = 30;
+			formato.color = 0xFFFFFF;
+			formato.align = TextFormatAlign.CENTER;
+			texto.width = 300;
+			texto.x = mainStage.stageWidth / 2 - texto.width / 2;
+			texto.y = mainStage.stageHeight / 2 - texto.height / 2;
+			texto.text = "PERDISTE NIERI"
+			texto.setTextFormat(formato)
+			mainStage.addChild(texto);
+			
+			endGame = true;
 		}
 		
 		private function clickOnPause (event:MouseEvent):void
@@ -287,9 +325,10 @@ package
 			}
 		}
 		
+		
 		protected function update(event:Event):void
 		{
-			if (!gameIsPaused) 
+			if (!gameIsPaused && !endGame) 
 			{
 				myHero.update();
 				colisionHeroPlatform();
@@ -299,8 +338,9 @@ package
 				colisionBulletsEnemy();
 				heroShootTimer();
 				colisionHeroBulletPlatform();
+				lifeInStage();
 				//colisionEnemyBulletPlatform();
-				cam.lookAt(myHero.model);
+				//cam.lookAt(myHero.model);
 				
 				for (var l:int =0 ; l < vectorHeroBullets.length; l++) 
 				{
