@@ -250,7 +250,7 @@ package
 				colisionBulletsEnemy();
 				heroShootTimer();
 				colisionHeroBulletPlatform();
-				//colisionEnemyBulletPlatform();
+				colisionEnemyBulletPlatform();
 				cam.lookAt(myHero.model);
 				
 				for (var l:int =0 ; l < vectorHeroBullets.length; l++) 
