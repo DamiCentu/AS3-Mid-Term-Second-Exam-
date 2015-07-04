@@ -7,12 +7,14 @@ package
 	import flash.display.Sprite;
 	import flash.display.Stage;
 	import flash.events.Event;
-	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
+<<<<<<< HEAD
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
 	import flash.ui.Keyboard;
+=======
+>>>>>>> origin/master
 	
 	[SWF(width="1024", height="768", frameRate="60")]
 	
@@ -166,53 +168,6 @@ package
 				gameIsPaused = true;
 			}
 		}
-	
-		protected function keyUp(event:KeyboardEvent):void
-		{
-			switch(event.keyCode)
-			{
-				case Keyboard.LEFT:
-					isKeyLeft = false;
-					break;
-				
-				case Keyboard.RIGHT:
-					isKeyRight = false;
-					break;
-				
-				case Keyboard.UP:
-					isKeyUp = false;
-					break;
-				
-				case Keyboard.DOWN:
-					isKeyDown = false;
-					break;
-			}
-		}
-		
-		protected function keyDown(event:KeyboardEvent):void
-		{
-			switch(event.keyCode)
-			{
-				case Keyboard.LEFT:
-					isKeyLeft = true;
-					break;
-				
-				case Keyboard.RIGHT:
-					isKeyRight = true;
-					break;
-				
-				case Keyboard.UP:
-					isKeyUp = true;
-					break;
-				
-				case Keyboard.DOWN:
-					isKeyDown = true;
-					break;
-				case Keyboard.SPACE:
-					respawnBullet();
-					break;
-			}
-		}
 		
 		public function respawnBullet ():void
 		{
@@ -338,9 +293,14 @@ package
 				colisionBulletsEnemy();
 				heroShootTimer();
 				colisionHeroBulletPlatform();
+<<<<<<< HEAD
 				lifeInStage();
 				//colisionEnemyBulletPlatform();
 				//cam.lookAt(myHero.model);
+=======
+				colisionEnemyBulletPlatform();
+				cam.lookAt(myHero.model);
+>>>>>>> origin/master
 				
 				for (var l:int =0 ; l < vectorHeroBullets.length; l++) 
 				{

@@ -32,7 +32,7 @@ package
 		{
 			Main.removeEnemyBulletFromVector(this)
 			
-			if (Main.mainStage.constructor(model))
+			if (Main.mainStage.contains(model)) 
 			{
 				Main.mainStage.removeChild(model);
 			}
