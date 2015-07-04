@@ -52,3 +52,7 @@ bin-debug/Main-app.xml
 bin-debug/Main.swf
 *.xml
 bin-debug/Main.swf
+bin-debug/Main-app.xml
+bin-debug/Main-app.xml
+*.swf
+src/Main-app.xml
