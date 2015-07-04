@@ -7,9 +7,7 @@ package
 	import flash.display.Sprite;
 	import flash.display.Stage;
 	import flash.events.Event;
-	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
-	import flash.ui.Keyboard;
 	
 	[SWF(width="1024", height="768", frameRate="60")]
 	
@@ -126,53 +124,6 @@ package
 			else 
 			{
 				gameIsPaused = true;
-			}
-		}
-	
-		protected function keyUp(event:KeyboardEvent):void
-		{
-			switch(event.keyCode)
-			{
-				case Keyboard.LEFT:
-					isKeyLeft = false;
-					break;
-				
-				case Keyboard.RIGHT:
-					isKeyRight = false;
-					break;
-				
-				case Keyboard.UP:
-					isKeyUp = false;
-					break;
-				
-				case Keyboard.DOWN:
-					isKeyDown = false;
-					break;
-			}
-		}
-		
-		protected function keyDown(event:KeyboardEvent):void
-		{
-			switch(event.keyCode)
-			{
-				case Keyboard.LEFT:
-					isKeyLeft = true;
-					break;
-				
-				case Keyboard.RIGHT:
-					isKeyRight = true;
-					break;
-				
-				case Keyboard.UP:
-					isKeyUp = true;
-					break;
-				
-				case Keyboard.DOWN:
-					isKeyDown = true;
-					break;
-				case Keyboard.SPACE:
-					respawnBullet();
-					break;
 			}
 		}
 		
