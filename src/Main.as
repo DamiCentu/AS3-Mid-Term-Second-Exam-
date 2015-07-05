@@ -212,6 +212,7 @@ package
 			var i:int = vectorEnemyBullets.indexOf(obj);
 			vectorEnemyBullets.splice(i, 1);
 		}
+		
 		public static function removeEnemyFromVector (obj:Enemy):void
 		{
 			var i:int = vectorEnemys.indexOf(obj);
@@ -340,6 +341,7 @@ package
 			}
 		}
 		
+		
 		private function heroShootTimer():void
 		{
 			shootTimer += Main.mainStage.frameRate / 1000;
@@ -403,7 +405,6 @@ package
 					respawnBullet();
 				}
 			}
-			
 		}
 	}
 }
