@@ -41,7 +41,7 @@ package
 			var pGlobal:Point = mc.parent.localToGlobal(pLocal);
 			var pView:Point = view.globalToLocal(pGlobal);
 			
-			x = pView.x - Main.mainStage.stageWidth / 2;
+			//x = pView.x - Main.mainStage.stageWidth / 2;
 			y = pView.y - Main.mainStage.stageHeight / 2;
 			
 			//trace(pLocal, pGlobal);

@@ -1,5 +1,6 @@
 package
 {
+	import flash.display.MovieClip;
 	
 	public class Enemy
 	{
@@ -12,15 +13,17 @@ package
 		public var timeToShoot:int = 1500;
 		
 		public var checkRespawn:Boolean;
+		private var actualLevel:MovieClip;
 		
 		public function Enemy()
 		{
 		}
 		
-		public function spawn ():void
+		public function spawn (level:MovieClip):void
 		{
 			model = new MC_enemy;
-			Main.mainStage.addChild(model);
+			actualLevel = level;
+			level.addChild(model);
 			model.scaleX = model.scaleY = scale;
 			Main.vectorEnemys.push(this);
 			//model.mc_checkRight.alpha = 0;
@@ -57,9 +60,9 @@ package
 		{
 			Main.removeEnemyFromVector(this);
 				
-			if (Main.mainStage.contains(model))
+			if (actualLevel.contains(model))
 			{
-				Main.mainStage.removeChild(model);
+				actualLevel.removeChild(model);
 			}
 		}
 		
@@ -71,7 +74,7 @@ package
 				for (var i:int =0 ; i < Main.vectorEnemys.length; i++) 
 				{
 					Main.myEnemyBullet = new EnemyBullet ();
-					Main.myEnemyBullet.spawn(Main.vectorEnemys[i].model.y + 30, Main.vectorEnemys[i].model.x + 15);
+					Main.myEnemyBullet.spawn(actualLevel, Main.vectorEnemys[i].model.y + 30, Main.vectorEnemys[i].model.x + 15);
 					currentTimeToShoot = 0
 					if (Main.myEnemyBullet.spawneo)
 					{

@@ -19,6 +19,7 @@ package
 		public var timeToReturnOriginalColor:int = 50;
 		public var currentTimeToReturnOriginalColor:int = 0;
 		
+		public var actualLevel:MovieClip;
 		public function Hero()
 		{
 		}
@@ -27,6 +28,8 @@ package
 			model = new MC_hero;
 			level.addChild(model);
 			model.scaleX = model.scaleY = scale;
+			
+			actualLevel = level;
 			
 			effectColor = new ColorTransform();
 			effectColor.color = 0xFFFFFF;
@@ -58,9 +61,9 @@ package
 			
 			if(lifes > 0)
 			{
-				//Main.myLevel1.heroRespawnPointLV1();
+				Main.myLevel1.heroRespawnPointLV1();
 				//Main.myLevel2.heroRespawnPointLV2();
-				Main.myLevel3.heroRespawnPointLV3();
+//				Main.myLevel3.heroRespawnPointLV3();
 				
 				model.transform.colorTransform = effectColor;
 				Main.mainStage.addEventListener(Event.ENTER_FRAME,updateTimeToChangeColor);

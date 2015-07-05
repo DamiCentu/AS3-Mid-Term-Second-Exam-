@@ -31,7 +31,7 @@ package
 			for(var i:int = 0 ; i < 2; i++)
 			{
 				Main.myEnemy = new Enemy();
-				Main.myEnemy.spawn();
+				Main.myEnemy.spawn(level);
 				if(i == 0)
 				{
 					Main.myEnemy.model.x = 300;

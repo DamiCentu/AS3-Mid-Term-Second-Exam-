@@ -1,5 +1,6 @@
 package
 {
+	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.geom.ColorTransform;
 
@@ -22,6 +23,8 @@ package
 		
 		public var timeToReturnOriginalColor:int = 50;
 		public var currentTimeToReturnOriginalColor:int = 0;
+		
+		private var actualLevel:MovieClip;
 		
 		public function Boss()
 		{
@@ -76,7 +79,7 @@ package
 				for(var i:int=-numBullets/2; i<numBullets/2; i++)
 				{
 					Main.myEnemyBullet = new EnemyBullet ();
-					Main.myEnemyBullet.spawn(model.y + 90, model.x + 10);
+					Main.myEnemyBullet.spawn(actualLevel, model.y + 90, model.x + 10);
 					Main.myEnemyBullet.speedX = i * fruitAngle;
 				}
 					currentTimeToShoot = 0

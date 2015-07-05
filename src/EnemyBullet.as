@@ -1,11 +1,15 @@
 package
 {
+	import flash.display.MovieClip;
+
 	public class EnemyBullet
 	{
 		public var model:MC_bullet;
 		public var speed:int = 3;
 		public var speedX:int;
 		public var spawneo:Boolean;
+		
+		private var actualLevel:MovieClip;
 		
 		public function EnemyBullet()
 		{
@@ -21,10 +25,11 @@ package
 			model.y += speed;
 			model.x += speedX;
 		}
-		public function spawn(posY:int , posX:int):void
+		public function spawn(level:MovieClip, posY:int , posX:int):void
 		{
 			model = new MC_bullet;
-			Main.mainStage.addChild(model);
+			level.addChild(model);
+			actualLevel = level;
 			//model.x = Main.myEnemy.model.x;
 			//model.y = Main.myEnemy.model.y;
 			//posY = model.y;
@@ -38,9 +43,9 @@ package
 		{
 			Main.removeEnemyBulletFromVector(this)
 			
-			if (Main.mainStage.contains(model)) 
+			if (actualLevel.contains(model)) 
 			{
-				Main.mainStage.removeChild(model);
+				actualLevel.removeChild(model);
 			}
 		}
 	}
