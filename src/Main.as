@@ -33,6 +33,7 @@ package
 		public static var myHero:Hero;
 		public static var myEnemy:Enemy;
 		public var myLevel1:Level1;
+		public var myLevel2:Level2;
 		public static var myBullet:HeroBullet;
 		
 		public static var myEnemyBullet:EnemyBullet;
@@ -53,7 +54,6 @@ package
 		public static var endGame:Boolean = false;
 		
 		//public var cam:camera2d;
-		//public var level1mc:MovieClip;
 		
 		public function Main()
 		{
@@ -64,9 +64,9 @@ package
 			
 			myLevel1 = new Level1 ();
 			myLevel1.spawn();
-			//level1mc = myLevel1.level;
-			//cam.addToView(level1mc);
-			//cam.addToView(Level1);
+			
+			//myLevel2 = new Level2 ();
+			//myLevel2.spawn();
 			
 			myHero = new Hero();
 			myHero.spawn();
