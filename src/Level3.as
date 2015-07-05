@@ -6,6 +6,7 @@ package
 	{
 		public var level : MC_level3;
 		private var heroPoint:Point;
+		public var bossPoint:Point;
 		
 		public function Level3()
 		{
@@ -18,38 +19,29 @@ package
 			level.y = Main.mainStage.height /2 - 2200;
 			level.x = Main.mainStage.width /2 - 50;
 			loadPlatforms();
-			loadEnemysRespawnPoints();
+			loadBossRespawnPoint();
 			loadHeroRespawnPoint();
 			Main.myHero = new Hero();
 			Main.myHero.spawn(level);
-			//Main.myHero.model.x
-			heroRespawnPointLV3();
 			Main.myBoss = new Boss();
-			Main.myBoss.spawn();
-			Main.myBoss.model.x = 500;
-			Main.myBoss.model.y = 100;
-			for(var i:int = 0 ; i < 2; i++)
-			{
-				Main.myEnemy = new Enemy();
-				Main.myEnemy.spawn(level);
-				if(i == 0)
-				{
-					Main.myEnemy.model.x = 300;
-					Main.myEnemy.model.y = 500;
-				}
-				if(i == 1)
-				{
-					Main.myEnemy.model.x = 600;
-					Main.myEnemy.model.y = 300;
-				}
-				//	}
-			}
+			Main.myBoss.spawn(level);
+			
+			heroRespawnPointLV3();
+			
+			bossRespawnPointLV3();
+			
 		}
 		
 		public function heroRespawnPointLV3 ():void
 		{
 			Main.myHero.model.x = heroPoint.x;
 			Main.myHero.model.y = heroPoint.y;
+		}
+		
+		public function bossRespawnPointLV3():void
+		{
+			Main.myBoss.model.x = bossPoint.x;
+			Main.myBoss.model.y = bossPoint.y;
 		}
 		
 		public function loadPlatforms():void
@@ -63,19 +55,20 @@ package
 				}
 			}
 		}
-		public function loadEnemysRespawnPoints():void
+		public function loadBossRespawnPoint():void
 		{
 			for(var i:int=0; i<level.numChildren; i++)
 			{
-				if(level.getChildAt(i).name == "mc_enemyRespawnPoint")
+				if(level.getChildAt(i).name == "mc_bossPoint")
 				{
-					Main.enemysRespawnPoints.push( level.getChildAt(i) );
+					bossPoint = new Point(level.getChildAt(i).x, level.getChildAt(i).y);
 					//level.getChildAt(i).alpha = 0;
 				}
 			}
 		}
 		
-		public function loadHeroRespawnPoint():void{
+		public function loadHeroRespawnPoint():void
+		{
 			for(var i:int=0; i<level.numChildren; i++)
 			{
 				if(level.getChildAt(i).name == "mc_heroRespawnPoint")

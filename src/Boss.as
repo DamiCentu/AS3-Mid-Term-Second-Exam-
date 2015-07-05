@@ -24,18 +24,20 @@ package
 		public var timeToReturnOriginalColor:int = 50;
 		public var currentTimeToReturnOriginalColor:int = 0;
 		
-		private var actualLevel:MovieClip;
+		public var actualLevel:MovieClip;
 		
 		public function Boss()
 		{
 		}
 		
-		public function spawn ():void
+		public function spawn (level:MovieClip):void
 		{
 			model = new MC_boss;
 			Main.mainStage.addChild(model);
 			model.scaleX = model.scaleY = scale;
 			//model.mc_checkRight.alpha = 0;
+			
+			actualLevel = level;
 			
 			effectColor = new ColorTransform();
 			effectColor.color = 0xFFFFFF;

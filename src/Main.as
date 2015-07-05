@@ -65,15 +65,17 @@ package
 			cam = new camera2d();
 			cam.on();
 			
-			myLevel1 = new Level1 ();
-			myLevel1.spawn();
+			//myLevel1 = new Level1 ();
+			//myLevel1.spawn();
 			
 			//myLevel2 = new Level2 ();
 			//myLevel2.spawn();
 			
-//			myLevel3 = new Level3 ();
-//			myLevel3.spawn();
-			cam.addToView(myLevel1.level);
+			myLevel3 = new Level3 ();
+			myLevel3.spawn();
+			//cam.addToView(myLevel1.level);
+		//	cam.addToView(myLevel2.level);
+			cam.addToView(myLevel3.level);
 			
 			
 			
@@ -339,7 +341,10 @@ package
 			{
 				myHero.update();
 				colisionHeroPlatform();
-				myEnemy.update();
+				if(myEnemy != null)
+				{
+					myEnemy.update();
+				}
 				colisionEnemyPlatform();
 				colisionHeroEnemy();
 				colisionHeroBulletsEnemy();
@@ -348,9 +353,12 @@ package
 				lifeInStage();
 				colisionEnemyBulletPlatform();
 				colisionEnemyBulletHero();
-//				myBoss.update();
-//				colisionBossPlatform();
-//				colisionHeroBulletsBoss();
+				//if(myBoss != null)
+				//{
+					myBoss.update();
+					colisionBossPlatform();
+					colisionHeroBulletsBoss();
+				//}
 				cam.lookAt(myHero.model);				
 				
 				for (var l:int =0 ; l < vectorHeroBullets.length; l++) 

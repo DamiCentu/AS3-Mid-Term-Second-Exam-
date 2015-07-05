@@ -24,6 +24,7 @@ package
 			Main.myHero.spawn(level);
 			
 			heroRespawnPointLV1();
+			
 			for(var i:int = 0 ; i < Main.enemysRespawnPoints.length; i++)
 			{
 				Main.myEnemy = new Enemy();
