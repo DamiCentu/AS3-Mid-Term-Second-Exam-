@@ -34,11 +34,9 @@ package
 					Main.vectorEnemys[i].move();
 				}				
 			}
+			
 			timerToShoot();
-			//if (checkRespawn)
-			//{
-				//Main.myEnemyBullet.update();
-			//}
+		
 			if (checkRespawn)
 			{
 				for (var l:int =0 ; l < Main.vectorEnemyBullets.length; l++) 
@@ -73,7 +71,7 @@ package
 				for (var i:int =0 ; i < Main.vectorEnemys.length; i++) 
 				{
 					Main.myEnemyBullet = new EnemyBullet ();
-					Main.myEnemyBullet.spawn(Main.vectorEnemys[i].model.y, Main.vectorEnemys[i].model.x);
+					Main.myEnemyBullet.spawn(Main.vectorEnemys[i].model.y + 30, Main.vectorEnemys[i].model.x + 15);
 					currentTimeToShoot = 0
 					if (Main.myEnemyBullet.spawneo)
 					{

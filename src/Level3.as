@@ -1,24 +1,29 @@
 package
 {
-	public class Level2
+	public class Level3
 	{
-		public var level:MC_level2;
-		public function Level2()
+		public var level : MC_level3;
+		
+		public function Level3()
 		{
 		}
 		
 		public function spawn ():void
 		{
-			level = new MC_level2;
+			level = new MC_level3;
 			Main.mainStage.addChild(level);
-			level.y = Main.mainStage.height /2 - 2550;
-			level.x = Main.mainStage.width /2 - 300;
+			level.y = Main.mainStage.height /2 - 2200;
+			level.x = Main.mainStage.width /2 - 50;
 			loadPlatforms();
 			loadEnemysRespawnPoints();
 			Main.myHero = new Hero();
 			Main.myHero.spawn();
 			//Main.myHero.model.x
-			heroRespawnPointLV2();
+			heroRespawnPointLV3();
+			Main.myBoss = new Boss();
+			Main.myBoss.spawn();
+			Main.myBoss.model.x = 500;
+			Main.myBoss.model.y = 100;
 			for(var i:int = 0 ; i < 2; i++)
 			{
 				Main.myEnemy = new Enemy();
@@ -37,10 +42,10 @@ package
 			}
 		}
 		
-		public function heroRespawnPointLV2 ():void
+		public function heroRespawnPointLV3 ():void
 		{
-			Main.myHero.model.x = 760;
-			Main.myHero.model.y = 640;
+			Main.myHero.model.x = 530;
+			Main.myHero.model.y = 570;
 		}
 		
 		public function loadPlatforms():void

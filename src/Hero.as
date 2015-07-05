@@ -17,8 +17,8 @@ package
 			model = new MC_hero;
 			Main.mainStage.addChild(model);
 			model.scaleX = model.scaleY = scale;
-			model.x = 200;
-			model.y = 600;
+			//model.x = 200;
+			//model.y = 600;
 			//model.mc_checkRight.alpha = 0;
 			//model.mc_checkBack.alpha = 0;
 			//model.mc_checkLeft.alpha = 0;
@@ -40,8 +40,11 @@ package
 		public function looseLife ():void
 		{
 			lifes--;
-			model.x = 200;
-			model.y = 600;
+			/*model.x = 200;
+			model.y = 600;*/
+			//Main.myLevel1.heroRespawnPointLV1();
+			//Main.myLevel2.heroRespawnPointLV2();
+			Main.myLevel3.heroRespawnPointLV3();
 		}
 		public function moveX(direction:int):void
 		{

@@ -32,15 +32,18 @@ package
 		
 		public static var myHero:Hero;
 		public static var myEnemy:Enemy;
-		public var myLevel1:Level1;
-		public var myLevel2:Level2;
+		public static var myLevel1:Level1;
+		public static var myLevel2:Level2;
+		public static var myLevel3:Level3;
 		public static var myBullet:HeroBullet;
+		public static var myBoss:Boss;
 		
 		public static var myEnemyBullet:EnemyBullet;
 		
 		public static var bulletsLeft:int;
 		
 		public static var platforms:Array = new Array ();
+		public static var enemysRespawnPoints:Array = new Array ();
 		
 		public var timeToShoot:Number = 1.5;
 		private var shootTimer:Number = 0;
@@ -62,18 +65,23 @@ package
 			//	cam = new camera2d();
 			//cam.on();
 			
-			myLevel1 = new Level1 ();
-			myLevel1.spawn();
+			//myLevel1 = new Level1 ();
+			//myLevel1.spawn();
 			
 			//myLevel2 = new Level2 ();
 			//myLevel2.spawn();
 			
-			myHero = new Hero();
-			myHero.spawn();
+			myLevel3 = new Level3 ();
+			myLevel3.spawn();
 			
-			for(var i:int = 0 ; i < 2; i++)
+			
+			//myHero = new Hero();
+			//myHero.spawn();
+			
+			//for(var i:int = 0 ; i < enemysRespawnPoints.length; i++)
+		//	{
+			/*for(var i:int = 0 ; i < 2; i++)
 			{
-				
 				myEnemy = new Enemy();
 				myEnemy.spawn();
 				if(i == 0)
@@ -86,7 +94,8 @@ package
 					myEnemy.model.x = 600;
 					myEnemy.model.y = 300;
 				}
-			}
+		//	}
+			}*/
 			
 			pauseMC = createPauseButton();
 			
@@ -147,6 +156,22 @@ package
 			texto.x = mainStage.stageWidth / 2 - texto.width / 2;
 			texto.y = mainStage.stageHeight / 2 - texto.height / 2;
 			texto.text = "PERDISTE NIERI"
+			texto.setTextFormat(formato)
+			mainStage.addChild(texto);
+			
+			endGame = true;
+		}
+		
+		public static function win():void
+		{
+			formato.font = "Comic Sans MS";
+			formato.size = 30;
+			formato.color = 0xFFFFFF;
+			formato.align = TextFormatAlign.CENTER;
+			texto.width = 300;
+			texto.x = mainStage.stageWidth / 2 - texto.width / 2;
+			texto.y = mainStage.stageHeight / 2 - texto.height / 2;
+			texto.text = "GANASTE NIERI"
 			texto.setTextFormat(formato)
 			mainStage.addChild(texto);
 			
@@ -270,6 +295,18 @@ package
 			}
 		}
 		
+		public function colisionHeroBulletsBoss():void
+		{
+			for(var j:int =0 ; j < vectorHeroBullets.length; j++)
+			{
+				if(vectorHeroBullets[j] != null && vectorHeroBullets[j].model.hitTestObject(myBoss.model))
+				{
+					vectorHeroBullets[j].destroy();
+					myBoss.destroy();
+				}
+			}
+		}
+		
 		public function colisionEnemyPlatform():void
 		{
 			for (var i:int =0 ; i < platforms.length; i++) 
@@ -287,6 +324,22 @@ package
 				}
 			}
 		}
+		
+		public function colisionBossPlatform():void
+		{
+			for (var i:int =0 ; i < platforms.length; i++) 
+			{
+				if(myBoss.model.mc_checkRight.hitTestObject(platforms[i]))
+				{
+					myBoss.direction = -1;
+				}
+				else if(myBoss.model.mc_checkLeft.hitTestObject(platforms[i]))
+				{
+					myBoss.direction = 1;
+				}
+			}
+		}
+		
 		private function heroShootTimer():void
 		{
 			shootTimer += Main.mainStage.frameRate / 1000;
@@ -312,6 +365,9 @@ package
 				lifeInStage();
 				colisionEnemyBulletPlatform();
 				colisionEnemyBulletHero();
+				myBoss.update();
+				colisionBossPlatform();
+				colisionHeroBulletsBoss();
 				//cam.lookAt(myHero.model);				
 				
 				for (var l:int =0 ; l < vectorHeroBullets.length; l++) 

@@ -4,6 +4,7 @@ package
 	{
 		public var model:MC_bullet;
 		public var speed:int = 3;
+		public var speedX:int;
 		public var spawneo:Boolean;
 		
 		public function EnemyBullet()
@@ -18,6 +19,7 @@ package
 		private function move():void
 		{
 			model.y += speed;
+			model.x += speedX;
 		}
 		public function spawn(posY:int , posX:int):void
 		{
