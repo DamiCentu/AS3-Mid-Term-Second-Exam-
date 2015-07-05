@@ -65,15 +65,15 @@ package
 			cam = new camera2d();
 			cam.on();
 			
-			//myLevel1 = new Level1 ();
-			//myLevel1.spawn();
+			myLevel1 = new Level1 ();
+			myLevel1.spawn();
 			
 			//myLevel2 = new Level2 ();
 			//myLevel2.spawn();
 			
-			myLevel3 = new Level3 ();
-			myLevel3.spawn();
-			cam.addToView(myLevel3.level);
+//			myLevel3 = new Level3 ();
+//			myLevel3.spawn();
+			cam.addToView(myLevel1.level);
 			
 			
 			//myHero = new Hero();
@@ -198,7 +198,7 @@ package
 				canShoot = false;
 				shootTimer = 0;
 				myBullet = new HeroBullet();
-				myBullet.spawn();
+				myBullet.spawn(myHero.actualLevel);
 			}
 		}
 		
@@ -292,6 +292,7 @@ package
 					{
 						vectorHeroBullets[j].destroy();
 						vectorEnemys[i].destroy();
+						break;
 					}
 				}
 			}
@@ -368,9 +369,9 @@ package
 				lifeInStage();
 				colisionEnemyBulletPlatform();
 				colisionEnemyBulletHero();
-				myBoss.update();
-				colisionBossPlatform();
-				colisionHeroBulletsBoss();
+//				myBoss.update();
+//				colisionBossPlatform();
+//				colisionHeroBulletsBoss();
 				cam.lookAt(myHero.model);				
 				
 				for (var l:int =0 ; l < vectorHeroBullets.length; l++) 
