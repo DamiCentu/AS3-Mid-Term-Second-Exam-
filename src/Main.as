@@ -76,27 +76,6 @@ package
 			cam.addToView(myLevel3.level);
 			
 			
-			//myHero = new Hero();
-			//myHero.spawn();
-			
-			//for(var i:int = 0 ; i < enemysRespawnPoints.length; i++)
-		//	{
-			/*for(var i:int = 0 ; i < 2; i++)
-			{
-				myEnemy = new Enemy();
-				myEnemy.spawn();
-				if(i == 0)
-				{
-					myEnemy.model.x = 300;
-					myEnemy.model.y = 500;
-				}
-				if(i == 1)
-				{
-					myEnemy.model.x = 600;
-					myEnemy.model.y = 300;
-				}
-		//	}
-			}*/
 			
 			pauseMC = createPauseButton();
 			
@@ -389,7 +368,6 @@ package
 			if(key.isDown(key.UP))
 			{
 				myHero.moveY(-1)
-				//myLevel1.level.y += 4;
 			}
 			if(key.isDown(key.RIGHT))
 			{
