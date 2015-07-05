@@ -1,5 +1,6 @@
 package
 {
+	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.geom.ColorTransform;
 
@@ -21,10 +22,10 @@ package
 		public function Hero()
 		{
 		}
-		public function spawn ():void
+		public function spawn (level:MovieClip):void
 		{
 			model = new MC_hero;
-			Main.mainStage.addChild(model);
+			level.addChild(model);
 			model.scaleX = model.scaleY = scale;
 			
 			effectColor = new ColorTransform();

@@ -16,9 +16,8 @@ package
 			loadPlatforms();
 			loadEnemysRespawnPoints();
 			Main.myHero = new Hero();
-			Main.myHero.spawn();
-			//Main.myHero.model.x = level.mc_heroRespawnPoint.x;
-			//Main.myHero.model.y = level.mc_heroRespawnPoint.y;
+			Main.myHero.spawn(level);
+			
 			heroRespawnPointLV1();
 			for(var i:int = 0 ; i < 2; i++)
 			{

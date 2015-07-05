@@ -1,8 +1,11 @@
 package
 {
+	import flash.geom.Point;
+
 	public class Level3
 	{
 		public var level : MC_level3;
+		private var heroPoint:Point;
 		
 		public function Level3()
 		{
@@ -16,8 +19,9 @@ package
 			level.x = Main.mainStage.width /2 - 50;
 			loadPlatforms();
 			loadEnemysRespawnPoints();
+			loadHeroRespawnPoint();
 			Main.myHero = new Hero();
-			Main.myHero.spawn();
+			Main.myHero.spawn(level);
 			//Main.myHero.model.x
 			heroRespawnPointLV3();
 			Main.myBoss = new Boss();
@@ -44,8 +48,8 @@ package
 		
 		public function heroRespawnPointLV3 ():void
 		{
-			Main.myHero.model.x = 530;
-			Main.myHero.model.y = 570;
+			Main.myHero.model.x = heroPoint.x;
+			Main.myHero.model.y = heroPoint.y;
 		}
 		
 		public function loadPlatforms():void
@@ -66,6 +70,17 @@ package
 				if(level.getChildAt(i).name == "mc_enemyRespawnPoint")
 				{
 					Main.enemysRespawnPoints.push( level.getChildAt(i) );
+					//level.getChildAt(i).alpha = 0;
+				}
+			}
+		}
+		
+		public function loadHeroRespawnPoint():void{
+			for(var i:int=0; i<level.numChildren; i++)
+			{
+				if(level.getChildAt(i).name == "mc_heroRespawnPoint")
+				{
+					heroPoint = new Point(level.getChildAt(i).x, level.getChildAt(i).y);
 					//level.getChildAt(i).alpha = 0;
 				}
 			}

@@ -56,14 +56,14 @@ package
 		
 		public static var endGame:Boolean = false;
 		
-		//public var cam:camera2d;
+		public var cam:camera2d;
 		
 		public function Main()
 		{
 			mainStage = stage;
 			
-			//	cam = new camera2d();
-			//cam.on();
+			cam = new camera2d();
+			cam.on();
 			
 			//myLevel1 = new Level1 ();
 			//myLevel1.spawn();
@@ -73,6 +73,7 @@ package
 			
 			myLevel3 = new Level3 ();
 			myLevel3.spawn();
+			cam.addToView(myLevel3.level);
 			
 			
 			//myHero = new Hero();
@@ -370,7 +371,7 @@ package
 				myBoss.update();
 				colisionBossPlatform();
 				colisionHeroBulletsBoss();
-				//cam.lookAt(myHero.model);				
+				cam.lookAt(myHero.model);				
 				
 				for (var l:int =0 ; l < vectorHeroBullets.length; l++) 
 				{
