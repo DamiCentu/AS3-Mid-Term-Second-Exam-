@@ -57,6 +57,8 @@ package
 		}
 		public function destroy():void
 		{
+			Main.removeEnemyFromVector(this);
+				
 			if (Main.mainStage.contains(model))
 			{
 				Main.mainStage.removeChild(model);

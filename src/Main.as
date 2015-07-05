@@ -44,7 +44,7 @@ package
 		public var timeToShoot:Number = 1.5;
 		private var shootTimer:Number = 0;
 		private var canShoot:Boolean = false;
-		public var gameIsPaused:Boolean = false;
+		public  static var gameIsPaused:Boolean = false;
 		private var pauseMC:MovieClip;
 		
 		public static var texto:TextField = new TextField();
@@ -187,6 +187,11 @@ package
 			var i:int = vectorEnemyBullets.indexOf(obj);
 			vectorEnemyBullets.splice(i, 1);
 		}
+		public static function removeEnemyFromVector (obj:Enemy):void
+		{
+			var i:int = vectorEnemys.indexOf(obj);
+			vectorEnemys.splice(i, 1);
+		}
 		
 		public function colisionHeroBulletPlatform():void
 		{
@@ -250,14 +255,17 @@ package
 			}
 		}
 		
-		public function colisionBulletsEnemy():void
+		public function colisionHeroBulletsEnemy():void
 		{
 			for(var j:int =0 ; j < vectorHeroBullets.length; j++)
 			{
-				if(vectorHeroBullets[j] != null && vectorHeroBullets[j].model.hitTestObject(myEnemy.model))
+				for (var i:int =0 ; i < vectorEnemys.length; i++) 
 				{
-					vectorHeroBullets[j].destroy();
-					myEnemy.destroy();
+					if(vectorHeroBullets[j] != null && vectorHeroBullets[j].model.hitTestObject(vectorEnemys[i].model))
+					{
+						vectorHeroBullets[j].destroy();
+						vectorEnemys[i].destroy();
+					}
 				}
 			}
 		}
@@ -298,7 +306,7 @@ package
 				myEnemy.update();
 				colisionEnemyPlatform();
 				colisionHeroEnemy();
-				colisionBulletsEnemy();
+				colisionHeroBulletsEnemy();
 				heroShootTimer();
 				colisionHeroBulletPlatform();
 				lifeInStage();
@@ -334,7 +342,10 @@ package
 			}			
 			if(key.isDown(key.SPACE))
 			{
-				respawnBullet();
+				if (!gameIsPaused && !endGame)
+				{
+					respawnBullet();
+				}
 			}
 			
 		}
