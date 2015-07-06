@@ -263,6 +263,14 @@ package
 			}
 		}
 		
+		public function colisionHeroBoss():void
+		{
+				if(myHero.model.hitTestObject(myBoss.model))
+				{
+					myHero.looseLife();
+				}
+		}
+		
 		public function colisionHeroBulletsEnemy():void
 		{
 			for(var j:int =0 ; j < vectorHeroBullets.length; j++)
@@ -358,6 +366,7 @@ package
 					myBoss.update();
 					colisionBossPlatform();
 					colisionHeroBulletsBoss();
+					colisionHeroBoss();
 				//}
 				cam.lookAt(myHero.model);				
 				

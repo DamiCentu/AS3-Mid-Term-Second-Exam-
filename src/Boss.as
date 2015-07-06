@@ -33,7 +33,8 @@ package
 		public function spawn (level:MovieClip):void
 		{
 			model = new MC_boss;
-			Main.mainStage.addChild(model);
+			//Main.mainStage.addChild(model);
+			level.addChild(model);
 			model.scaleX = model.scaleY = scale;
 			//model.mc_checkRight.alpha = 0;
 			
