@@ -57,6 +57,8 @@ package
 		public static var endGame:Boolean = false;
 		
 		public var myMenu:MC_menu;
+		public var myCreditos:MC_creditos;
+		public var myHowToPlay:MC_hoyToPlay;
 		
 		public var cam:camera2d;
 		
@@ -64,10 +66,11 @@ package
 		{
 			mainStage = stage;
 			
-			myMenu = new MC_menu;
+			createMenu();
+			/*myMenu = new MC_menu;
 			mainStage.addChild(myMenu);
 			myMenu.x = mainStage.width / 2;
-			myMenu.y = mainStage.height / 2;
+			myMenu.y = mainStage.height / 2;*/
 			//cam = new camera2d();
 		//	cam.on();
 			
@@ -79,17 +82,66 @@ package
 			
 			//myLevel3 = new Level3 ();
 		//	myLevel3.spawn();
-			//cam.addToView(myLevel1.level);
+			
 		//	cam.addToView(myLevel2.level);
 			//cam.addToView(myLevel3.level);
 			
+			myMenu.mc_credits.addEventListener(MouseEvent.CLICK, clickOnCredits);
+			myMenu.mc_howToPlay.addEventListener(MouseEvent.CLICK, clickOnHowToPlay);
+			myMenu.mc_start.addEventListener(MouseEvent.CLICK, clickOnStart);
 			
 			
+		}
+		public function createMenu():void
+		{
+			myMenu = new MC_menu;
+			mainStage.addChild(myMenu);
+			myMenu.x = mainStage.width / 2;
+			myMenu.y = mainStage.height / 2;
+		}
+		
+		protected function clickOnCreditsGoBack(event:MouseEvent):void
+		{
+			mainStage.removeChild(myCreditos);
+			createMenu();
+		}
+		
+		protected function clickOnStart(event:MouseEvent):void
+		{
 			
+		}
+		
+		protected function clickOnHowToPlay(event:MouseEvent):void
+		{
+			myHowToPlay = new MC_hoyToPlay;
+			mainStage.removeChild(myMenu);
+			mainStage.addChild(myHowToPlay);
+			myHowToPlay.x = mainStage.width / 2;
+			myHowToPlay.y = mainStage.height / 2;
+			myHowToPlay.mc_goBack.addEventListener(MouseEvent.CLICK, clickOnHowToPlayGoBack);
+		}
+		
+		protected function clickOnHowToPlayGoBack(event:MouseEvent):void
+		{
+			mainStage.removeChild(myHowToPlay);
+			createMenu();
+		}
+		
+		protected function clickOnCredits(event:MouseEvent):void
+		{
+			myCreditos = new MC_creditos;
+			mainStage.removeChild(myMenu);
+			mainStage.addChild(myCreditos);
+			myCreditos.x = mainStage.width / 2;
+			myCreditos.y = mainStage.height / 2;
+			myCreditos.mc_goBack.addEventListener(MouseEvent.CLICK, clickOnCreditsGoBack);
 		}
 		
 		public function loadLVL1():void
 		{
+			cam = new camera2d();
+			cam.on();
+			cam.addToView(myLevel1.level);
 			pauseMC = createPauseButton();
 			
 			mainStage.addChild(pauseMC);
