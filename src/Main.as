@@ -62,6 +62,8 @@ package
 		
 		public var cam:camera2d;
 		
+		public var actualLevel:int;
+		
 		public function Main()
 		{
 			mainStage = stage;
@@ -103,20 +105,26 @@ package
 		protected function clickOnCreditsGoBack(event:MouseEvent):void
 		{
 			mainStage.removeChild(myCreditos);
-			createMenu();
+			//createMenu();
+			myMenu.visible = true;
+			
 		}
 		
 		protected function clickOnStart(event:MouseEvent):void
 		{
-			
+			myLevel1 = new Level1 ();
+			myLevel1.spawn();
+			loadLVL1();
+			myMenu.visible = false;
 		}
 		
 		protected function clickOnHowToPlay(event:MouseEvent):void
 		{
 			myHowToPlay = new MC_hoyToPlay;
-			mainStage.removeChild(myMenu);
+			//mainStage.removeChild(myMenu);
+			myMenu.visible = false;
 			mainStage.addChild(myHowToPlay);
-			myHowToPlay.x = mainStage.width / 2;
+			myHowToPlay.x = mainStage.width / 2 - 150;
 			myHowToPlay.y = mainStage.height / 2;
 			myHowToPlay.mc_goBack.addEventListener(MouseEvent.CLICK, clickOnHowToPlayGoBack);
 		}
@@ -124,21 +132,24 @@ package
 		protected function clickOnHowToPlayGoBack(event:MouseEvent):void
 		{
 			mainStage.removeChild(myHowToPlay);
-			createMenu();
+			//createMenu();
+			myMenu.visible = true;
 		}
 		
 		protected function clickOnCredits(event:MouseEvent):void
 		{
 			myCreditos = new MC_creditos;
-			mainStage.removeChild(myMenu);
+			//mainStage.removeChild(myMenu);
+			myMenu.visible = false;
 			mainStage.addChild(myCreditos);
-			myCreditos.x = mainStage.width / 2;
+			myCreditos.x = mainStage.width / 2 - 250;
 			myCreditos.y = mainStage.height / 2;
 			myCreditos.mc_goBack.addEventListener(MouseEvent.CLICK, clickOnCreditsGoBack);
 		}
 		
 		public function loadLVL1():void
 		{
+			actualLevel = 1;
 			cam = new camera2d();
 			cam.on();
 			cam.addToView(myLevel1.level);
@@ -424,13 +435,13 @@ package
 				lifeInStage();
 				colisionEnemyBulletPlatform();
 				colisionEnemyBulletHero();
-				//if(myBoss != null)
-				//{
+				if(actualLevel == 3)
+				{
 					myBoss.update();
 					colisionBossPlatform();
 					colisionHeroBulletsBoss();
 					colisionHeroBoss();
-				//}
+				}
 				cam.lookAt(myHero.model);				
 				
 				for (var l:int =0 ; l < vectorHeroBullets.length; l++) 
