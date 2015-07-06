@@ -16,7 +16,8 @@ package
 			level = new MC_level;
 			Main.mainStage.addChild(level);
 			level.y = Main.mainStage.height /2 - 1850;
-			level.x = Main.mainStage.width /2 - 120;
+		//	level.x = Main.mainStage.width /2 - 120;
+			level.x = Main.mainStage.width /2- 270;
 			loadPlatforms();
 			loadEnemysRespawnPoints();
 			loadHeroRespawnPoint();

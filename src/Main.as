@@ -112,8 +112,6 @@ package
 		
 		protected function clickOnStart(event:MouseEvent):void
 		{
-			myLevel1 = new Level1 ();
-			myLevel1.spawn();
 			loadLVL1();
 			myMenu.visible = false;
 		}
@@ -152,6 +150,8 @@ package
 			actualLevel = 1;
 			cam = new camera2d();
 			cam.on();
+			myLevel1 = new Level1 ();
+			myLevel1.spawn();
 			cam.addToView(myLevel1.level);
 			pauseMC = createPauseButton();
 			
@@ -162,7 +162,27 @@ package
 			pauseMC.addEventListener(MouseEvent.CLICK, clickOnPause);
 			stage.addEventListener(Event.ENTER_FRAME, update);
 		}
+		public function loadLVL2():void
+		{
+			actualLevel = 2;
+			myLevel2 = new Level2 ();
+			myLevel2.spawn();
+			cam.addToView(myLevel2.level);
+		}
 		
+		public function colisionHeroLevel1End():void
+		{
+			if(myHero.model.hitTestObject(myLevel1.level.mc_levelEnd))
+			{
+				mainStage.removeChild(myLevel1.level);
+				cam.removeToView(myLevel1.level)
+				vectorEnemys = new Vector.<Enemy>;
+				vectorEnemyBullets = new Vector.<EnemyBullet>;
+				vectorHeroBullets = new Vector.<HeroBullet>;
+				loadLVL2();
+				
+			}
+		}
 		private function createPauseButton():MovieClip
 		{
 			var mc:MovieClip = new MovieClip();
@@ -325,6 +345,8 @@ package
 				}
 			}
 		}
+	
+		
 		
 		public function colisionHeroEnemy():void
 		{
@@ -435,6 +457,7 @@ package
 				lifeInStage();
 				colisionEnemyBulletPlatform();
 				colisionEnemyBulletHero();
+				colisionHeroLevel1End();
 				if(actualLevel == 3)
 				{
 					myBoss.update();
