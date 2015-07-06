@@ -10,7 +10,7 @@ package
 		public var scale:Number = 1;
 		public var speed:int = 3;
 		public var direction:int = 1;
-		public var lifes:int = 3;
+		public var lifes:int = 20;
 		
 		public var currentTimeToShoot:int = 0;
 		public var timeToShoot:int = 1500;
@@ -33,7 +33,6 @@ package
 		public function spawn (level:MovieClip):void
 		{
 			model = new MC_boss;
-			//Main.mainStage.addChild(model);
 			level.addChild(model);
 			model.scaleX = model.scaleY = scale;
 			//model.mc_checkRight.alpha = 0;
@@ -85,13 +84,11 @@ package
 					Main.myEnemyBullet.spawn(actualLevel, model.y + 90, model.x + 10);
 					Main.myEnemyBullet.speedX = i * fruitAngle;
 				}
-					currentTimeToShoot = 0
-					if (Main.myEnemyBullet.spawneo)
-					{
-						checkRespawn = true;
-					}
-				
-					
+				currentTimeToShoot = 0
+				if (Main.myEnemyBullet.spawneo)
+				{
+					checkRespawn = true;
+				}
 			}
 		}
 		

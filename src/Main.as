@@ -56,14 +56,20 @@ package
 		
 		public static var endGame:Boolean = false;
 		
+		public var myMenu:MC_menu;
+		
 		public var cam:camera2d;
 		
 		public function Main()
 		{
 			mainStage = stage;
 			
-			cam = new camera2d();
-			cam.on();
+			myMenu = new MC_menu;
+			mainStage.addChild(myMenu);
+			myMenu.x = mainStage.width / 2;
+			myMenu.y = mainStage.height / 2;
+			//cam = new camera2d();
+		//	cam.on();
 			
 			//myLevel1 = new Level1 ();
 			//myLevel1.spawn();
@@ -71,14 +77,19 @@ package
 			//myLevel2 = new Level2 ();
 			//myLevel2.spawn();
 			
-			myLevel3 = new Level3 ();
-			myLevel3.spawn();
+			//myLevel3 = new Level3 ();
+		//	myLevel3.spawn();
 			//cam.addToView(myLevel1.level);
 		//	cam.addToView(myLevel2.level);
-			cam.addToView(myLevel3.level);
+			//cam.addToView(myLevel3.level);
 			
 			
 			
+			
+		}
+		
+		public function loadLVL1():void
+		{
 			pauseMC = createPauseButton();
 			
 			mainStage.addChild(pauseMC);
