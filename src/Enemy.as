@@ -29,6 +29,7 @@ package
 			model.mc_checkRight.alpha = 0;
 			model.mc_checkLeft.alpha = 0;
 		}
+		
 		public function update():void
 		{
 			for (var i:int =0 ; i < Main.vectorEnemys.length; i++) 
@@ -44,14 +45,13 @@ package
 			if (checkRespawn)
 			{
 				for (var l:int =0 ; l < Main.vectorEnemyBullets.length; l++) 
+				{
+					if (Main.vectorEnemyBullets[l] !=null)
 					{
-						if (Main.vectorEnemyBullets[l] !=null)
-						{
-							Main.vectorEnemyBullets[l].update();
-						}				
-					}		
+						Main.vectorEnemyBullets[l].update();
+					}				
+				}		
 			}
-			
 		}
 		public function move():void
 		{

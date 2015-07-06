@@ -30,10 +30,6 @@ package
 			model = new MC_bullet;
 			level.addChild(model);
 			actualLevel = level;
-			//model.x = Main.myEnemy.model.x;
-			//model.y = Main.myEnemy.model.y;
-			//posY = model.y;
-			//posX = model.x;
 			model.y = posY ; 
 			model.x = posX;
 			spawneo = true;

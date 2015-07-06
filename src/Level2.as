@@ -14,9 +14,7 @@ package
 		public function spawn ():void
 		{
 			level = new MC_level2;
-			Main.mainStage.addChild(level);
-			//level.y = Main.mainStage.height /2;
-			level.x = Main.mainStage.width /2 - 500;
+			level.x = Main.mainStage.width /2 - 300;
 			loadPlatforms();
 			loadEnemysRespawnPoints();
 			loadHeroRespawnPoint();
@@ -42,6 +40,7 @@ package
 		}
 		public function loadPlatforms():void
 		{
+			Main.platforms = new Array();
 			for(var i:int=0; i<level.numChildren; i++)
 			{
 				if(level.getChildAt(i).name == "mc_platform")
@@ -59,7 +58,7 @@ package
 				if(level.getChildAt(i).name == "mc_enemyRespawnPoint")
 				{
 					Main.enemysRespawnPoints.push( level.getChildAt(i));
-					//level.getChildAt(i).alpha = 0;
+					level.getChildAt(i).alpha = 0;
 				}
 			}
 		}
@@ -70,7 +69,7 @@ package
 				if(level.getChildAt(i).name == "mc_heroRespawnPoint")
 				{
 					heroPoint = new Point(level.getChildAt(i).x, level.getChildAt(i).y);
-					//level.getChildAt(i).alpha = 0;
+					level.getChildAt(i).alpha = 0;
 				}
 			}
 		}

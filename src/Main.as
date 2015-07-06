@@ -64,8 +64,6 @@ package
 		
 		public var cam:camera2d;
 		
-		//public var restartCheck:Boolean;
-		
 		public static var actualLevel:int;
 		
 		public function Main()
@@ -132,7 +130,7 @@ package
 				{
 					mainStage.removeChild(myLevel2.level);
 				}
-				//vectorEnemys = new Vector.<Enemy>;
+				
 				vectorEnemyBullets = new Vector.<EnemyBullet>;
 				vectorHeroBullets = new Vector.<HeroBullet>;
 				

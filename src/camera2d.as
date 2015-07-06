@@ -38,7 +38,6 @@ package
 			var pLocal:Point = new Point(mc.x, mc.y);
 			var pGlobal:Point = mc.parent.localToGlobal(pLocal);
 			var pView:Point = view.globalToLocal(pGlobal);
-			
 			//x = pView.x - Main.mainStage.stageWidth / 2;
 			y = pView.y - Main.mainStage.stageHeight / 2 - 190;
 			
