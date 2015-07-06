@@ -26,7 +26,8 @@ package
 			level.addChild(model);
 			model.scaleX = model.scaleY = scale;
 			Main.vectorEnemys.push(this);
-			//model.mc_checkRight.alpha = 0;
+			model.mc_checkRight.alpha = 0;
+			model.mc_checkLeft.alpha = 0;
 		}
 		public function update():void
 		{

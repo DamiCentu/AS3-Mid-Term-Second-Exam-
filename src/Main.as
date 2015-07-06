@@ -7,10 +7,12 @@ package
 	import flash.display.Sprite;
 	import flash.display.Stage;
 	import flash.events.Event;
+	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
 	import flash.text.TextFormatAlign;
+	import flash.ui.Keyboard;
 	
 	[SWF(width="1024", height="768", frameRate="60")]
 	
@@ -62,37 +64,80 @@ package
 		
 		public var cam:camera2d;
 		
-		public var actualLevel:int;
+		//public var restartCheck:Boolean;
+		
+		public static var actualLevel:int;
 		
 		public function Main()
 		{
 			mainStage = stage;
 			
 			createMenu();
-			/*myMenu = new MC_menu;
-			mainStage.addChild(myMenu);
-			myMenu.x = mainStage.width / 2;
-			myMenu.y = mainStage.height / 2;*/
-			//cam = new camera2d();
-		//	cam.on();
-			
-			//myLevel1 = new Level1 ();
-			//myLevel1.spawn();
-			
-			//myLevel2 = new Level2 ();
-			//myLevel2.spawn();
-			
-			//myLevel3 = new Level3 ();
-		//	myLevel3.spawn();
-			
-		//	cam.addToView(myLevel2.level);
-			//cam.addToView(myLevel3.level);
-			
+		
 			myMenu.mc_credits.addEventListener(MouseEvent.CLICK, clickOnCredits);
 			myMenu.mc_howToPlay.addEventListener(MouseEvent.CLICK, clickOnHowToPlay);
 			myMenu.mc_start.addEventListener(MouseEvent.CLICK, clickOnStart);
+			mainStage.addEventListener(KeyboardEvent.KEY_UP, restartKey);
 			
 			
+		}
+		
+		protected function restartKey(event:KeyboardEvent):void
+		{
+			switch(event.keyCode)
+			{
+				case Keyboard.R:
+					if (!gameIsPaused && myMenu.visible != true)
+					{
+						restart();
+					}
+					break;
+			}
+		}
+		
+		public function restart():void
+		{
+			if(actualLevel == 1)
+			{
+				cam.removeToView(myLevel1.level);
+				if(mainStage.contains(myLevel1.level))
+				{
+					mainStage.removeChild(myLevel1.level);
+				}
+				vectorEnemys = new Vector.<Enemy>;
+				vectorEnemyBullets = new Vector.<EnemyBullet>;
+				vectorHeroBullets = new Vector.<HeroBullet>;
+				
+				myMenu.visible = true;
+			}
+			
+			else if (actualLevel == 2)
+			{
+				cam.removeToView(myLevel2.level)
+				if(mainStage.contains(myLevel1.level))
+				{
+					mainStage.removeChild(myLevel2.level);
+				}
+				vectorEnemys = new Vector.<Enemy>;
+				vectorEnemyBullets = new Vector.<EnemyBullet>;
+				vectorHeroBullets = new Vector.<HeroBullet>;
+				
+				myMenu.visible = true;
+			}
+			
+			else if (actualLevel == 3)
+			{
+				cam.removeToView(myLevel2.level)
+				if(mainStage.contains(myLevel1.level))
+				{
+					mainStage.removeChild(myLevel2.level);
+				}
+				//vectorEnemys = new Vector.<Enemy>;
+				vectorEnemyBullets = new Vector.<EnemyBullet>;
+				vectorHeroBullets = new Vector.<HeroBullet>;
+				
+				myMenu.visible = true;
+			}
 		}
 		public function createMenu():void
 		{
@@ -373,8 +418,6 @@ package
 				}
 			}
 		}
-	
-		
 		
 		public function colisionHeroEnemy():void
 		{

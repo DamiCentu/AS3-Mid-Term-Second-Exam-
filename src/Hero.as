@@ -11,7 +11,7 @@ package
 		public var velocityX:int;
 		public var velocityY:int;
 		public var scale:Number = 0.2;
-		public var lifes:int = 5;
+		public var lifes:int = 3;
 		
 		public var originalColor:ColorTransform;
 		public var effectColor:ColorTransform;
@@ -35,12 +35,11 @@ package
 			effectColor.color = 0xFFFFFF;
 			
 			originalColor = model.transform.colorTransform;
-			//model.x = 200;
-			//model.y = 600;
-			//model.mc_checkRight.alpha = 0;
-			//model.mc_checkBack.alpha = 0;
-			//model.mc_checkLeft.alpha = 0;
-			//model.mc_checkTop.alpha = 0;
+			
+			model.mc_checkRight.alpha = 0;
+			model.mc_checkBack.alpha = 0;
+			model.mc_checkLeft.alpha = 0;
+			model.mc_checkTop.alpha = 0;
 		}
 		public function update():void
 		{
@@ -53,7 +52,6 @@ package
 				Main.loose();
 				
 			}
-			
 		}
 		public function looseLife ():void
 		{
@@ -61,9 +59,20 @@ package
 			
 			if(lifes > 0)
 			{
+				if(Main.actualLevel == 1)
+				{
 				Main.myLevel1.heroRespawnPointLV1();
-				//Main.myLevel2.heroRespawnPointLV2();
-//				Main.myLevel3.heroRespawnPointLV3();
+				}
+				
+				if(Main.actualLevel == 2)
+				{
+					Main.myLevel2.heroRespawnPointLV2();
+				}
+				
+				if(Main.actualLevel == 3)
+				{
+					Main.myLevel3.heroRespawnPointLV3();
+				}
 				
 				model.transform.colorTransform = effectColor;
 				Main.mainStage.addEventListener(Event.ENTER_FRAME,updateTimeToChangeColor);
