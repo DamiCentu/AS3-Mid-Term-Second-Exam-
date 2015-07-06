@@ -198,6 +198,7 @@ package
 			myLevel1 = new Level1 ();
 			myLevel1.spawn();
 			cam.addToView(myLevel1.level);
+			
 			pauseMC = createPauseButton();
 			
 			mainStage.addChild(pauseMC);

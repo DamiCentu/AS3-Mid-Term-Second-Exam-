@@ -35,7 +35,8 @@ package
 			model = new MC_boss;
 			level.addChild(model);
 			model.scaleX = model.scaleY = scale;
-			//model.mc_checkRight.alpha = 0;
+			model.mc_checkRight.alpha = 0;
+			model.mc_checkLeft.alpha = 0;
 			
 			actualLevel = level;
 			
