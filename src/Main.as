@@ -174,8 +174,11 @@ package
 		{
 			if(myHero.model.hitTestObject(myLevel1.level.mc_levelEnd))
 			{
-				mainStage.removeChild(myLevel1.level);
-				cam.removeToView(myLevel1.level)
+				cam.removeToView(myLevel1.level);
+				if(mainStage.contains(myLevel1.level))
+				{
+					mainStage.removeChild(myLevel1.level);
+				}
 				vectorEnemys = new Vector.<Enemy>;
 				vectorEnemyBullets = new Vector.<EnemyBullet>;
 				vectorHeroBullets = new Vector.<HeroBullet>;
@@ -183,6 +186,31 @@ package
 				
 			}
 		}
+		
+		public function colisionHeroLevel2End():void
+		{
+			if(myHero.model.hitTestObject(myLevel2.level.mc_levelEnd))
+			{
+				cam.removeToView(myLevel2.level)
+				if(mainStage.contains(myLevel1.level))
+				{
+					mainStage.removeChild(myLevel2.level);
+				}
+				vectorEnemys = new Vector.<Enemy>;
+				vectorEnemyBullets = new Vector.<EnemyBullet>;
+				vectorHeroBullets = new Vector.<HeroBullet>;
+				loadLVL3();
+			}
+		}
+		
+		public function loadLVL3():void
+		{
+			actualLevel = 3;
+			myLevel3 = new Level3 ();
+			myLevel3.spawn();
+			cam.addToView(myLevel3.level);
+		}
+		
 		private function createPauseButton():MovieClip
 		{
 			var mc:MovieClip = new MovieClip();
@@ -457,7 +485,14 @@ package
 				lifeInStage();
 				colisionEnemyBulletPlatform();
 				colisionEnemyBulletHero();
-				colisionHeroLevel1End();
+				if(actualLevel == 1)
+				{
+					colisionHeroLevel1End();
+				}
+				if(actualLevel == 2)
+				{
+					colisionHeroLevel2End();
+				}
 				if(actualLevel == 3)
 				{
 					myBoss.update();
