@@ -58,13 +58,19 @@ package
 		
 		public static var endGame:Boolean = false;
 		
-		public var myMenu:MC_menu;
+		public static var myMenu:MC_menu;
 		public var myCreditos:MC_creditos;
 		public var myHowToPlay:MC_hoyToPlay;
 		
-		public var cam:camera2d;
+		public static var myLoose:MC_loose;
+		
+		public static var myWin:MC_win;
+		
+		public static var cam:camera2d;
 		
 		public static var actualLevel:int;
+		
+		public static var dificulty:int = 1;
 		
 		public function Main()
 		{
@@ -85,12 +91,62 @@ package
 			switch(event.keyCode)
 			{
 				case Keyboard.R:
-					if (!gameIsPaused && myMenu.visible != true)
+					if (endGame)
+					{
+						if(myLoose != null)
+						{
+							removeLoose();
+						}
+						else if(myWin != null)
+						{
+							removeWin();
+						}
+						myMenu.visible = true;
+						//endGame = false;
+					}
+					if (!endGame && !gameIsPaused && myMenu.visible != true)
 					{
 						restart();
 					}
 					break;
+				case Keyboard.D:
+					if(myMenu.visible)
+					{	
+						if(dificulty > 0 && dificulty < 4)
+						{
+							dificulty++;
+							if(dificulty >= 4)
+							{
+								dificulty = 1;
+							}
+						}
+					}
+					trace (dificulty)
+					break;
 			}
+		}
+		
+		public function dificultyOnStage():void
+		{
+			formato.font = "Comic Sans MS";
+			formato.size = 30;
+			formato.color = 0xFFFFFF;
+			formato.align = TextFormatAlign.CENTER;
+			texto.width = 300;
+			texto.x = mainStage.stageWidth -  texto.width + 40;
+			texto.y = mainStage.stageHeight - texto.height/2;
+			texto.text = "Dificultad:" + dificulty;
+			texto.setTextFormat(formato)
+			mainStage.addChild(texto);
+			
+			/*if(myMenu.visible == true)
+			{
+				texto.visible == true;
+			}
+			else if(myMenu.visible == false)
+			{
+				texto.visible == false;
+			}*/
 		}
 		
 		public function restart():void
@@ -105,7 +161,7 @@ package
 				vectorEnemys = new Vector.<Enemy>;
 				vectorEnemyBullets = new Vector.<EnemyBullet>;
 				vectorHeroBullets = new Vector.<HeroBullet>;
-				
+				endGame = true;
 				myMenu.visible = true;
 			}
 			
@@ -136,13 +192,16 @@ package
 				
 				myMenu.visible = true;
 			}
+			mainStage.removeChild(myHero.texto)
 		}
 		public function createMenu():void
 		{
 			myMenu = new MC_menu;
 			mainStage.addChild(myMenu);
-			myMenu.x = mainStage.width / 2;
-			myMenu.y = mainStage.height / 2;
+			myMenu.x = mainStage.width / 2 - 150;
+			myMenu.y = mainStage.height / 2 - 100;
+			//dificultyOnStage();
+			myMenu.visible = true;
 		}
 		
 		protected function clickOnCreditsGoBack(event:MouseEvent):void
@@ -156,7 +215,10 @@ package
 		protected function clickOnStart(event:MouseEvent):void
 		{
 			loadLVL1();
+			endGame = false;
+			gameIsPaused = false;
 			myMenu.visible = false;
+			
 		}
 		
 		protected function clickOnHowToPlay(event:MouseEvent):void
@@ -165,8 +227,8 @@ package
 			//mainStage.removeChild(myMenu);
 			myMenu.visible = false;
 			mainStage.addChild(myHowToPlay);
-			myHowToPlay.x = mainStage.width / 2 - 150;
-			myHowToPlay.y = mainStage.height / 2;
+			myHowToPlay.x = mainStage.width / 2 - 300;
+			myHowToPlay.y = mainStage.height / 2 - 100;
 			myHowToPlay.mc_goBack.addEventListener(MouseEvent.CLICK, clickOnHowToPlayGoBack);
 		}
 		
@@ -183,8 +245,8 @@ package
 			//mainStage.removeChild(myMenu);
 			myMenu.visible = false;
 			mainStage.addChild(myCreditos);
-			myCreditos.x = mainStage.width / 2 - 250;
-			myCreditos.y = mainStage.height / 2;
+			myCreditos.x = mainStage.width / 2 - 400;
+			myCreditos.y = mainStage.height / 2 - 200;
 			myCreditos.mc_goBack.addEventListener(MouseEvent.CLICK, clickOnCreditsGoBack);
 		}
 		
@@ -197,13 +259,8 @@ package
 			myLevel1.spawn();
 			cam.addToView(myLevel1.level);
 			
-			pauseMC = createPauseButton();
+			respawnPauseButton();
 			
-			mainStage.addChild(pauseMC);
-			pauseMC.x = stage.width - 300;
-			pauseMC.y = 20;
-			
-			pauseMC.addEventListener(MouseEvent.CLICK, clickOnPause);
 			stage.addEventListener(Event.ENTER_FRAME, update);
 		}
 		public function loadLVL2():void
@@ -255,7 +312,7 @@ package
 			cam.addToView(myLevel3.level);
 		}
 		
-		private function createPauseButton():MovieClip
+		public function createPauseButton():MovieClip
 		{
 			var mc:MovieClip = new MovieClip();
 			
@@ -279,54 +336,130 @@ package
 			
 			return mc;
 		}
-		
-		public function lifeInStage():void
+		public function removePauseButton(): void
 		{
-			formato.font = "Comic Sans MS";
-			formato.size = 30;
-			formato.color = 0xFFFFFF;
-			formato.align = TextFormatAlign.CENTER;
-			texto.width = 300;
-			texto.x = -75;
-			texto.y = mainStage.stageHeight - texto.height/2;
-			texto.text = "Vidas: " + myHero.lifes;
-			texto.setTextFormat(formato)
-			mainStage.addChild(texto);
+			
+		}
+	
+		public function respawnPauseButton():void
+		{
+			pauseMC = createPauseButton();
+			
+			mainStage.addChild(pauseMC);
+			pauseMC.x = stage.width - 770;
+			pauseMC.y = 25;
+			
+			pauseMC.addEventListener(MouseEvent.CLICK, clickOnPause);
 		}
 		
+		//public function removePauseButton():void
+		//{
+			
+		//}
+		
+		
+		public static function spawnMCLoose():void
+		{
+			myLoose = new MC_loose;
+			mainStage.addChild(myLoose);
+			myLoose.x = mainStage.width / 2 - myLoose.width/2 + 250;
+			myLoose.y = mainStage.height / 2 - myLoose.height/2 + 50;
+			myLoose.scaleX = 0.9;
+		}
+		
+		public static function removeLoose():void
+		{
+			if (mainStage.contains(myLoose)){
+				mainStage.removeChild(myLoose);
+			}
+		}
 		public static function loose():void
 		{
-			formato.font = "Comic Sans MS";
-			formato.size = 30;
-			formato.color = 0xFFFFFF;
-			formato.align = TextFormatAlign.CENTER;
-			texto.width = 300;
-			texto.x = mainStage.stageWidth / 2 - texto.width / 2;
-			texto.y = mainStage.stageHeight / 2 - texto.height / 2;
-			texto.text = "PERDISTE NIERI"
-			texto.setTextFormat(formato)
-			mainStage.addChild(texto);
+			if(actualLevel == 1)
+			{
+				cam.removeToView(myLevel1.level);
+				if(mainStage.contains(myLevel1.level))
+				{
+					mainStage.removeChild(myLevel1.level);
+				}
+				vectorEnemys = new Vector.<Enemy>;
+				vectorEnemyBullets = new Vector.<EnemyBullet>;
+				vectorHeroBullets = new Vector.<HeroBullet>;
+				
+				//myMenu.visible = true;
+			}
+				
+			else if (actualLevel == 2)
+			{
+				cam.removeToView(myLevel2.level)
+				if(mainStage.contains(myLevel1.level))
+				{
+					mainStage.removeChild(myLevel2.level);
+				}
+				vectorEnemys = new Vector.<Enemy>;
+				vectorEnemyBullets = new Vector.<EnemyBullet>;
+				vectorHeroBullets = new Vector.<HeroBullet>;
+				
+				//myMenu.visible = true;
+			}
+				
+			else if (actualLevel == 3)
+			{
+				cam.removeToView(myLevel3.level)
+				if(mainStage.contains(myLevel1.level))
+				{
+					mainStage.removeChild(myLevel3.level);
+				}
+				
+				vectorEnemyBullets = new Vector.<EnemyBullet>;
+				vectorHeroBullets = new Vector.<HeroBullet>;
+				
+				//myMenu.visible = true;
+			}
+			
+			
+			spawnMCLoose();
 			
 			endGame = true;
+		}
+		
+		public static function spawnMCWin():void
+		{
+			myWin = new MC_win;
+			mainStage.addChild(myWin);
+			myWin.x = mainStage.width / 2 - myWin.width/2 + 310;
+			myWin.y = mainStage.height / 2 - myWin.height/2 - 300;
+			//myWin.scaleX = 0.9;
+		}
+		
+		public static function removeWin():void
+		{
+			if (mainStage.contains(myWin)){
+				mainStage.removeChild(myWin);
+			}
 		}
 		
 		public static function win():void
 		{
-			formato.font = "Comic Sans MS";
-			formato.size = 30;
-			formato.color = 0xFFFFFF;
-			formato.align = TextFormatAlign.CENTER;
-			texto.width = 300;
-			texto.x = mainStage.stageWidth / 2 - texto.width / 2;
-			texto.y = mainStage.stageHeight / 2 - texto.height / 2;
-			texto.text = "GANASTE NIERI"
-			texto.setTextFormat(formato)
-			mainStage.addChild(texto);
+			if (actualLevel == 3)
+			{
+				cam.removeToView(myLevel3.level)
+				if(mainStage.contains(myLevel1.level))
+				{
+					mainStage.removeChild(myLevel3.level);
+				}
+				
+				vectorEnemyBullets = new Vector.<EnemyBullet>;
+				vectorHeroBullets = new Vector.<HeroBullet>;
+				
+				//myMenu.visible = true;
+			}
+			spawnMCWin();
 			
 			endGame = true;
 		}
 		
-		private function clickOnPause (event:MouseEvent):void
+		public function clickOnPause (event:MouseEvent):void
 		{
 			if(gameIsPaused)
 			{
@@ -508,11 +641,10 @@ package
 			}
 		}
 		
-		
 		protected function update(event:Event):void
-		{
+		{	
 			if (!gameIsPaused && !endGame) 
-			{
+				{
 				myHero.update();
 				colisionHeroPlatform();
 				if(myEnemy != null)
@@ -524,7 +656,7 @@ package
 				colisionHeroBulletsEnemy();
 				heroShootTimer();
 				colisionHeroBulletPlatform();
-				lifeInStage();
+				//lifeInStage();
 				colisionEnemyBulletPlatform();
 				colisionEnemyBulletHero();
 				if(actualLevel == 1)
@@ -552,7 +684,12 @@ package
 					}				
 				}			
 			}
-			
+		
+			if(myMenu.visible)
+			{
+				dificultyOnStage();
+			}
+				
 			if (key.isDown(key.DOWN))
 			{
 				myHero.moveY(1)

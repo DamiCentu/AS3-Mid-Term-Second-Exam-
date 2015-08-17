@@ -3,6 +3,9 @@ package
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.geom.ColorTransform;
+	import flash.text.TextField;
+	import flash.text.TextFormat;
+	import flash.text.TextFormatAlign;
 
 	public class Hero
 	{
@@ -11,7 +14,7 @@ package
 		public var velocityX:int;
 		public var velocityY:int;
 		public var scale:Number = 0.2;
-		public var lifes:int = 3;
+		public var lifes:int;
 		
 		public var originalColor:ColorTransform;
 		public var effectColor:ColorTransform;
@@ -19,7 +22,11 @@ package
 		public var timeToReturnOriginalColor:int = 50;
 		public var currentTimeToReturnOriginalColor:int = 0;
 		
+		public  var texto:TextField = new TextField();
+		public  var formato:TextFormat = new TextFormat();
+		
 		public var actualLevel:MovieClip;
+		
 		public function Hero()
 		{
 		}
@@ -30,6 +37,18 @@ package
 			model.scaleX = model.scaleY = scale;
 			
 			actualLevel = level;
+			if(Main.dificulty == 1)
+			{
+				lifes = 3;
+			}
+			else if(Main.dificulty == 2)
+			{
+				lifes = 2;
+			}
+			else if(Main.dificulty == 3)
+			{
+				lifes = 1;
+			}
 			
 			effectColor = new ColorTransform();
 			effectColor.color = 0xFFFFFF;
@@ -41,6 +60,7 @@ package
 			model.mc_checkLeft.alpha = 0;
 			model.mc_checkTop.alpha = 0;
 		}
+		
 		public function update():void
 		{
 			model.x += velocityX;
@@ -50,12 +70,39 @@ package
 			if (lifes <= 0)
 			{
 				Main.loose();
-				
+				Main.mainStage.removeChild(texto);
 			}
+			else if (lifes > 0)
+			{	
+				lifeInStage();
+			}
+			/*else if(Main.myMenu.visible == true)
+			{
+				texto.visible = false;
+			}
+			else if (Main.myMenu.visible == false)
+			{
+				texto.visible = true;
+			}*/
 		}
+		
+		public function lifeInStage():void
+		{
+				formato.font = "Comic Sans MS";
+				formato.size = 30;
+				formato.color = 0xFFFFFF;
+				formato.align = TextFormatAlign.CENTER;
+				texto.width = 300;
+				texto.x = -75;
+				texto.y = Main.mainStage.stageHeight - texto.height/2;
+				texto.text = "Vidas: " + lifes;
+				texto.setTextFormat(formato)
+				Main.mainStage.addChild(texto);
+		}
+		
 		public function looseLife ():void
 		{
-			lifes--;
+			
 			
 			if(lifes > 0)
 			{
@@ -76,6 +123,8 @@ package
 				
 				model.transform.colorTransform = effectColor;
 				Main.mainStage.addEventListener(Event.ENTER_FRAME,updateTimeToChangeColor);
+				
+				lifes--;
 			}
 		}
 		public function moveX(direction:int):void

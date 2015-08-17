@@ -8,12 +8,12 @@ package
 	{
 		public var model:MC_boss;
 		public var scale:Number = 1;
-		public var speed:int = 3;
+		public var speed:int;
 		public var direction:int = 1;
-		public var lifes:int = 20;
+		public var lifes:int;
 		
 		public var currentTimeToShoot:int = 0;
-		public var timeToShoot:int = 1500;
+		public var timeToShoot:int;
 		
 		public var checkRespawn:Boolean;
 		
@@ -39,6 +39,25 @@ package
 			model.mc_checkLeft.alpha = 0;
 			
 			actualLevel = level;
+			
+			if(Main.dificulty == 1)
+			{
+				lifes = 10;
+				speed = 3;
+				timeToShoot = 1500;
+			}
+			else if(Main.dificulty == 2)
+			{
+				lifes = 15;
+				speed = 5;
+				timeToShoot = 1250;
+			}
+			else if(Main.dificulty == 3)
+			{
+				lifes = 20;
+				speed = 7;
+				timeToShoot = 1000;
+			}
 			
 			effectColor = new ColorTransform();
 			effectColor.color = 0xFFFFFF;
@@ -95,7 +114,6 @@ package
 		
 		public function destroy():void
 		{
-			
 			lifes--;
 			if (lifes <= 0)
 			{

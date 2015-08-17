@@ -15,7 +15,7 @@ package
 		public function spawn ():void
 		{
 			level = new MC_level3;
-			level.x = Main.mainStage.width /2 - 100;
+			level.x = Main.mainStage.width /2 - 350;
 			loadPlatforms();
 			loadBossRespawnPoint();
 			loadHeroRespawnPoint();
